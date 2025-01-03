@@ -1,4 +1,4 @@
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, RedirectToSignIn, SignedOut } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -40,6 +40,7 @@ export default function RootLayout({
           layout: {
             logoImageUrl: "/icons/yoom-logo.svg",
             socialButtonsVariant: "iconButton",
+            unsafe_disableDevelopmentModeWarnings: true,
           },
           variables: {
             colorText: "#fff",
@@ -53,6 +54,9 @@ export default function RootLayout({
         <body className={`${inter.className} bg-dark-2`}>
           <Toaster />
           {children}
+          <SignedOut>
+            <RedirectToSignIn />
+          </SignedOut>
         </body>
       </ClerkProvider>
     </html>
